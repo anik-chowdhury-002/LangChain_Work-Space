@@ -1,0 +1,34 @@
+
+from langchain_groq import ChatGroq
+from dotenv import load_dotenv
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+
+load_dotenv()
+
+prompt1 = PromptTemplate(
+    template='genarate a detailed report on {topic} in {Language}',
+    input_variables=['topic', 'Language']
+
+)
+
+prompt2 = PromptTemplate(
+    template='genarate a 5 pointer summary from the following {text}',
+    input_variables=['text']
+)
+
+model = ChatGroq(
+    model="qwen/qwen3.6-27b",
+    temperature=0,
+    )
+
+parser = StrOutputParser()
+
+chain = prompt1 | model | parser | prompt2 | model | parser
+
+result = chain.invoke({'topic':'Unemployment in India','Language':'English'})
+
+print(result)
+
+chain.get_graph().print_ascii()
