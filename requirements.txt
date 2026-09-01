@@ -24,3 +24,12 @@ python-dotenv
 # Machine Learning Utilities
 numpy
 scikit-learn
+
+typing-extensions
+pydantic
+email-validator
+langchain-groq
+langchain-classic
+langchain-community 
+wikipedia
+langchain-chroma
